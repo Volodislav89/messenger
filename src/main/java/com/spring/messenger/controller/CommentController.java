@@ -30,9 +30,11 @@ public class CommentController {
 
     @PostMapping("/posts/{postId}/comments")
     public Comment createComment(@PathVariable (value = "postId") Long postId,
-                                 @Valid @RequestBody Comment comment) {
+                                 @Valid @RequestBody Comment comment, Principal principal) {
+        User user = userRepository.findByUsername(principal.getName()).orElseThrow(() -> new RuntimeException("No such User"));
         return postRepository.findById(postId).map(post -> {
             comment.setPost(post);
+            comment.setUser(user);
             return commentRepository.save(comment);
         }).orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));
     }
