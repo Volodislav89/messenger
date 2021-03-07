@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -20,9 +21,9 @@ public class PostController {
     private PostRepository postRepository;
     private UserRepository userRepository;
 
-    @GetMapping("/posts")
-    public Page<Post> getAllPosts(Pageable pageable) {
-        return postRepository.findAll(pageable);
+    @GetMapping("/getposts")
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
     }
 
     @PostMapping("/posts")

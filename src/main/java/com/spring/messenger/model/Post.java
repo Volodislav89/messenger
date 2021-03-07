@@ -1,5 +1,7 @@
 package com.spring.messenger.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.spring.messenger.security.model.User;
 import lombok.*;
 
@@ -30,7 +32,8 @@ public class Post extends AuditModel {
     @Lob
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 }
