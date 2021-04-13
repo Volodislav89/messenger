@@ -17,6 +17,7 @@ import java.security.Principal;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin
 public class CommentController {
     private CommentRepository commentRepository;
     private PostRepository postRepository;
